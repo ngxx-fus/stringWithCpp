@@ -1,0 +1,7 @@
+Bài 1. Xóa từ trong câu
+Thực hiện loại bỏ các từ trong 1 xâu
+Input
+Dòng 1 chứa xâu có không quá 1000 kí tự
+Dòng 2 chứa từ cần loại bỏ có không quá 10 kí tự
+Output
+Thực hiện loại bỏ từ trong xâu
