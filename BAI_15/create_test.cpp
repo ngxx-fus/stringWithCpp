@@ -15,10 +15,13 @@ int32_t main(){
     int t = 100; int len  = 0;
     cout << t << '\n';
     while(t--){
-        len = rand_in(1,10);
+        len = rand_in(1,100000);
         cout << rand_in(1,9);
         rep(i, 1, len-1){
-            cout << char('0'+rand_in(0,9));
+            if(rand_in(0,100)%2)
+                cout << char('0'+rand_in(0,9));
+            else
+                cout << char('a'+rand_in(0,25));
         }
         cout << '\n';
     }

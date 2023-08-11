@@ -1,6 +1,6 @@
 cd ..
-mkdir BAI_14
-cd BAI_14
+mkdir BAI_15
+cd BAI_15
 echo "" > source_code.cpp
 echo "" > input.txt
 echo "" > output.txt
