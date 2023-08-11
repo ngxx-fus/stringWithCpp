@@ -24,3 +24,5 @@ int32_t main(){
     }
 return 0;
 }
+//git config --global user.email msnp@outook.com.vn
+//git config --global user.name ngxx-fus
