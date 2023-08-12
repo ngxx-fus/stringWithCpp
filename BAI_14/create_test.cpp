@@ -15,7 +15,7 @@ int32_t main(){
     int t = 100; int len  = 0;
     cout << t << '\n';
     while(t--){
-        len = rand_in(1,10);
+        len = rand_in(1,1000);
         cout << rand_in(1,9);
         rep(i, 1, len-1){
             cout << char('0'+rand_in(0,9));
@@ -26,3 +26,4 @@ return 0;
 }
 //git config --global user.email msnp@outook.com.vn
 //git config --global user.name ngxx-fus
+
