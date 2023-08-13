@@ -6,7 +6,8 @@ Với cách này ta sẽ cố gắn kiểm tra dựa trên mảng count_char[cha
 Ta xây dựng mảng cộng dồn số lần xuất hiện cho mỗi ký tự từ 'a' -> 'z' tức 0->25.
 Như vậy giá trị trong mảng này luôn không giảm -> ta có thể chặt nhị phân từ (i+1) -> (len(s)-1) để tìm (j) 
 giá trị j - last trong phần code phía dưới nằm trong khoảng l = (i - first)+1 -> len(s)-1
-với mid = (l+r)/2,  ta duyệt ch: 0 -> 25 kiểm tra số lượng ký tự trong khoảng (i->mid] hay (first->last] trong phần code bên dưới.
+với mid = (l+r)/2,  ta duyệt ch: 0 -> 25 kiểm tra số lượng ký tự trong khoảng (i->mid] hay (first->last] trong phần code bên dưới,
+từ đó đếm xem có bao nhiêu loại ký tự trong [first->mid]
 #define count_fre(c, f, l) ((f == 0)?(count_char[c][l]):(count_char[c][l]-count_char[c][f-1]))
 cho ta biết số lần xuất hiện của ký tự thứ c trong bản chữ cái 'a' -> 'z'
 c: 0 -> 25 tương ứng 'a' -> 'z'
