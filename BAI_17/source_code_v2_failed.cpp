@@ -27,30 +27,41 @@ inline int64_t lcm(int64_t a,int64_t b){return a/gcd(a,b)*b;}
 #define len(s) s.size()
 #define st first
 #define nd seccond
+#define int int64_t
 template<class T> using vct = vector<T>;
 typedef std::pair< int, int > ii;
 
-int find_last(vct<vct<int>>const &count_char, int const &k, int const &first, int l = 0 , int r = -1){
+int find_last(vct<vct<int>>const &count_char, int const &k, int const &first, int l, int r,int mode){
     if( l > r || k == -1) return -1;
-    #define to_index(c) int(c-'a')
     //c :  ordered letter = to_index(c)
+    #define to_index(c) int(c-'a')
     #define count_fre(c, f, l) ((f == 0)?(count_char[c][l]):(count_char[c][l]-count_char[c][f-1]))
-    // binary search
-    int mid  = (r+l)/2;
-    //count a number of letter's type 
-    int count_type = 0;
-    rep(c, 0, 26-1) count_type += (count_fre(c, first, mid) != 0)?(1):(0);
-    //binary search : l == r
-    if( r == l ) if(count_type == k) return r; else return -1;
-    //binary search : l < r
-    if( count_type == k){
-        int mid_right = find_last(count_char, k, first, mid+1, r);
-        if( mid_right == -1) return mid;
-        else return mid_right;
+    #define MAX 1
+    #define MIN 0
+    stack< pair<int,int> > s;
+    int res = (mode == MAX)?(l-1):(r+1);
+    s.push({l,r});
+    while( !s.empty() ){
+        int L = s.top().first, R = s.top().second; 
+        s.pop();
+        if( L >  R ) continue; 
+        int count_type = 0, mid = (L+R)/2;
+        //count the  letter's type
+        rep(c, 0, 26-1) count_type += (count_fre(c, first, mid) != 0)?(1):(0);
+        if(count_type == k){
+            if(mode == MAX) {
+                res = max(res, mid);
+                s.push({mid+1, R});
+            }else /*mode = MIN*/ {
+                res = min(res, mid);
+                s.push({L, mid-1});
+            }
+        }else{
+            if(count_type > k) s.push({L, mid-1});
+            else/*count_type < k*/ s.push({mid+1, R});
+        }
     }
-    if( count_type < k  )  return find_last(count_char, k, first, mid+1, r);
-    if( count_type > k ) return find_last(count_char, k, first, l, mid-1);
-    return -1;
+    return (res == l-1 || res == r+1)?(-1):res;
 }
 
 int processing(string s, int k){
@@ -65,10 +76,11 @@ int processing(string s, int k){
             count_char[ch][i] = count_char[ch][i-1] + ((to_index(s[i]) == ch)?1:0);
     }
     //main processing
-    rep(first, 0, len(s)-1){
-        int last  = find_last(count_char, k, first, first+1, len(s)-1);
-        cout << first << " - " << last << '\n'; 
-        if( last >= first ) result += (last - first);
+    rep(first, 0, len(s)-k){
+        int last_min = find_last(count_char, k, first, first+k-1, len(s)-1, 0);
+        int last_max  = find_last(count_char, k, first, first+k-1, len(s)-1, 1);
+        //cout << first << " - " << last << '\n'; 
+        if( last_min >= first ) result += (last_max - last_min+1);
     }
     return result;
 }
@@ -76,8 +88,8 @@ int processing(string s, int k){
 int32_t main(){
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    freopen(  "input.txt", "r", stdin);
-    freopen(  "output.txt", "w", stdout);
+    //freopen(  "input.txt", "r", stdin);
+    //freopen(  "output.txt", "w", stdout);
     int test_case; cin >> test_case;
     string s; int k;
     for(; test_case && cin >> s >> k; test_case--){
