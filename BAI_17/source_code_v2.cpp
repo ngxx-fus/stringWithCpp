@@ -4,7 +4,7 @@ Là vị trí bắt đầu và kết thúc của một xâu con - một cửa s�
 Tham lam: Với mỗi vị trí bắt đầu của cửa sổ (i) ta tìm vị trí kết thúc (j) ở đâu mà số loại ký tự đảm bảo K phần tử. 
 Với cách này ta sẽ cố gắn kiểm tra dựa trên mảng count_char[char][index]=fre
 Ta xây dựng mảng cộng dồn số lần xuất hiện cho mỗi ký tự từ 'a' -> 'z' tức 0->25.
-Như vậy giá trị trong mảng này luôn không giảm -> ta có thể chặt nhị phân từ (i+1) -> (len(s)-1) để (j) 
+Như vậy giá trị trong mảng này luôn không giảm -> ta có thể chặt nhị phân từ (i+1) -> (len(s)-1) để tìm (j) 
 giá trị j - last trong phần code phía dưới nằm trong khoảng l = (i - first)+1 -> len(s)-1
 với mid = (l+r)/2,  ta duyệt ch: 0 -> 25 kiểm tra số lượng ký tự trong khoảng (i->mid] hay (first->last] trong phần code bên dưới.
 #define count_fre(c, f, l) ((f == 0)?(count_char[c][l]):(count_char[c][l]-count_char[c][f-1]))
